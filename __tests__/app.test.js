@@ -47,4 +47,16 @@ describe('demo routes', () => {
 
   });  
 
+  test('finds a profile via Get id', async() => {
+    const profile = await Profile.insert({
+      email: 'pamela',
+      accountId: 'pamela.testnet',
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/profiles/${profile.id}`);
+
+    expect(res.body).toEqual(profile);
+  });
+
 });
