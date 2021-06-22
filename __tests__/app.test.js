@@ -24,4 +24,27 @@ describe('demo routes', () => {
     });
   });
 
+  test('finds all profiles via GET', async() => {
+    const aidan = await Profile.insert({
+      email: 'aidan',
+      accountId: 'aidan.testnet',
+    });
+
+    const azlynn = await Profile.insert({
+      email: 'azlynn',
+      accountId: 'azlynn.testnet',
+    });
+
+    const hanson = await Profile.insert({
+      email: 'hanson',
+      accountId: 'hanson.testnet',
+    });
+
+    const res = await request(app)
+      .get('/api/v1/profiles');
+
+    expect(res.body).toEqual([aidan, azlynn, hanson]);
+
+  });  
+
 });
