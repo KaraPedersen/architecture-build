@@ -59,4 +59,16 @@ describe('demo routes', () => {
     expect(res.body).toEqual(profile);
   });
 
+  test('updates a profile via PUT', async () => {
+    const profile = await Profile.insert({
+      email: 'louie',
+      accountId: 'louie.testnet',
+    });
+    const res = await request(app)
+      .put(`/api/v1/profiles/${profile.od}`)
+      .send({ profile });
+
+    expect(res.body);
+  });
+
 });
