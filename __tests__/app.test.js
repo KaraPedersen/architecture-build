@@ -71,4 +71,15 @@ describe('demo routes', () => {
     expect(res.body);
   });
 
+  test('deletes a profile via DELETE', async () => {
+    const profile = await Profile.insert({
+      email: 'shane',
+      accountId: 'shane.testnet',
+    });
+    return request(app)
+      .delete(`/api/v1/profiles/${profile.id}`)
+      .send({ profile })
+      .then(res => expect(res.body).toEqual(profile));
+  });
+
 });
